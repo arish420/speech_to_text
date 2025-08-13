@@ -28,24 +28,25 @@ selection = st.selectbox("Select Output Language", ("Dutch","English","French"))
 lang_dict={"Dutch":"nl","Spanish":"es","French":"fr"}
 
 
-if uploaded_file and st.button("Sumbit"):
-    st.audio(uploaded_file, format=uploaded_file.type)
-    # Save the uploaded file temporarily
-    with open("temp_audio_input." + uploaded_file.name.split(".")[-1], "wb") as f:
-        f.write(uploaded_file.getbuffer())
-    input_filepath = "temp_audio_input." + uploaded_file.name.split(".")[-1]
-
-  
-    with open(input_filepath, "rb") as file:
-          transcription = client.audio.transcriptions.create(
-          file=(input_filepath, file.read()),
-          model="whisper-large-v3",
-          language=lang_dict[selection],
-          response_format="verbose_json",)
-          st.write(transcription.text)
-else:
-    st.error("Upload File")
+if st.button("Sumbit"):
+    if uploaded_file:
+        st.audio(uploaded_file, format=uploaded_file.type)
+        # Save the uploaded file temporarily
+        with open("temp_audio_input." + uploaded_file.name.split(".")[-1], "wb") as f:
+            f.write(uploaded_file.getbuffer())
+        input_filepath = "temp_audio_input." + uploaded_file.name.split(".")[-1]
+    
       
+        with open(input_filepath, "rb") as file:
+              transcription = client.audio.transcriptions.create(
+              file=(input_filepath, file.read()),
+              model="whisper-large-v3",
+              language=lang_dict[selection],
+              response_format="verbose_json",)
+              st.write(transcription.text)
+    else:
+        st.error("Upload File")
+          
 
 
 
