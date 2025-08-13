@@ -21,9 +21,9 @@ os.environ["GROQ_API_KEY"] =  df_groq.keys()[0]
 st.title("Speech to Text AI")
 
 client = Groq()
-uploaded_audio = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg"])
+uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg"])
 
-if uploaded_audio:
+if uploaded_file:
 
     st.audio(uploaded_file, format=uploaded_file.type)
     # Save the uploaded file temporarily
