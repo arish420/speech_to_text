@@ -23,7 +23,7 @@ st.title("Speech to Text AI")
 client = Groq()
 uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg"])
 
-selection = st.selectbox("Select Output Language", ("Dutch","English","French"))
+selection = st.selectbox("Select Output Language", ("Dutch","Spanish","French"))
 
 lang_dict={"Dutch":"nl","Spanish":"es","French":"fr"}
 
