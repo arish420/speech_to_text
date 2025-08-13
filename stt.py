@@ -24,13 +24,21 @@ client = Groq()
 uploaded_audio = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg"])
 
 if uploaded_audio:
-  with open(uploaded_audio, "rb") as file:
-        transcription = client.audio.transcriptions.create(
-        file=(uploaded_audio, file.read()),
-        model="whisper-large-v3",
-        language="ur",
-        response_format="verbose_json",)
-        st.write(transcription.text)
+
+    st.audio(uploaded_file, format=uploaded_file.type)
+    # Save the uploaded file temporarily
+    with open("temp_audio_input." + uploaded_file.name.split(".")[-1], "wb") as f:
+        f.write(uploaded_file.getbuffer())
+    input_filepath = "temp_audio_input." + uploaded_file.name.split(".")[-1]
+
+  
+    with open(input_filepath, "rb") as file:
+          transcription = client.audio.transcriptions.create(
+          file=(input_filepath, file.read()),
+          model="whisper-large-v3",
+          language="ur",
+          response_format="verbose_json",)
+          st.write(transcription.text)
       
 
 
