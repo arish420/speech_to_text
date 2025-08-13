@@ -45,7 +45,7 @@ if st.button("Sumbit"):
               response_format="verbose_json",)
               st.write(transcription.text)
     else:
-        st.error("Upload File")
+        st.error("Upload an Audio File First")
           
 
 
