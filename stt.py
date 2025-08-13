@@ -23,8 +23,12 @@ st.title("Speech to Text AI")
 client = Groq()
 uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg"])
 
-if uploaded_file:
+selection = st.selectbox("Select Output Language", ("Dutch","English","French"))
 
+lang_dict={"Dutch":"nl","Spanish":"es","French":"fr"}
+
+
+if uploaded_file and st.button("Sumbit"):
     st.audio(uploaded_file, format=uploaded_file.type)
     # Save the uploaded file temporarily
     with open("temp_audio_input." + uploaded_file.name.split(".")[-1], "wb") as f:
@@ -36,9 +40,11 @@ if uploaded_file:
           transcription = client.audio.transcriptions.create(
           file=(input_filepath, file.read()),
           model="whisper-large-v3",
-          language="ur",
+          language=lang_dict[selection],
           response_format="verbose_json",)
           st.write(transcription.text)
+else:
+    st.error("Upload File")
       
 
 
