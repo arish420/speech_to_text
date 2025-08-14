@@ -47,8 +47,7 @@ if st.button("Sumbit"):
         audio_file = open(input_filepath, "rb")
         transcription = client.audio.transcriptions.create(
           file=audio_file,
-          model=translation_dict[translation_option],
-          response_format="verbose_json")
+          model=translation_dict[translation_option])
 
         st.write(transcription.text)
       
