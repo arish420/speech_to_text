@@ -28,7 +28,7 @@ col1, col2 = st.columns(2)
 with col1:
     selection = st.selectbox("Select Output Language", ("Dutch","Spanish","French"))
 with col2:
-    translation_option = st.selectbox("Select Translation Option", ("Whisper","GPT-4o-mini-transcribe"))
+    translation_option = st.selectbox("Select Translation Option", ("Whisper","GPT-4o-transcribe"))
 
 
 lang_dict = {"Dutch":"nl","Spanish":"es","French":"fr"}
