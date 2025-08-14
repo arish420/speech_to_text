@@ -50,7 +50,7 @@ if st.button("Sumbit"):
           model=translation_dict[translation_option],
           response_format="verbose_json")
 
-        st.write(transcription.words)
+        st.write(transcription.text)
       
         # with open(input_filepath, "rb") as file:
         #       transcription = client.audio.transcriptions.create(
