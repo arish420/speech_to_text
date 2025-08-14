@@ -48,7 +48,7 @@ if st.button("Sumbit"):
         transcription = client.audio.transcriptions.create(
           file=audio_file,
           model=translation_dict[translation_option],
-        timestamp_granularities=["segments"])
+        timestamp_granularities=["words"])
 
 
         # segments = transcription.segments
