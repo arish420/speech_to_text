@@ -4,7 +4,7 @@ import os
 from groq import Groq
 import pandas as pd
 from dotenv import load_dotenv
-
+import re
 # Load environment variables
 load_dotenv()
 
@@ -49,7 +49,31 @@ if st.button("Sumbit"):
           file=audio_file,
           model=translation_dict[translation_option])
 
-        st.write(transcription.text)
+
+        segments = transcription['segments']
+    
+        sentences = []
+        current_sentence = ""
+        start_time = None
+    
+        for seg in segments:
+            if start_time is None:
+                start_time = seg['start']
+            current_sentence += " " + seg['text'].strip()
+            if re.search(r"[.!?]$", seg['text'].strip()):
+                sentences.append({
+                    "start": start_time,
+                    "end": seg['end'],
+                    "text": current_sentence.strip()
+                })
+                current_sentence = ""
+                start_time = None
+    
+        st.subheader("📝 Transcription with Timestamps")
+        for s in sentences:
+            st.markdown(f"**[{s['start']:.2f} - {s['end']:.2f}]** {s['text']}")
+
+        # st.write(transcription.text)
       
         # with open(input_filepath, "rb") as file:
         #       transcription = client.audio.transcriptions.create(
