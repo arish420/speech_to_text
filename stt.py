@@ -49,7 +49,7 @@ if st.button("Sumbit"):
           file=audio_file,
           model=translation_dict[translation_option],
           response_format="verbose_json",
-          timestamp_granularities=["segment"])
+          timestamp_granularities=["word"])
 
         st.write(transcription.words)
       
