@@ -20,7 +20,7 @@ os.environ["GROQ_API_KEY"] =  df_groq.keys()[0]
 
 
 st.title("Speech to Text AI")
-
+client = OpenAI()
 client = Groq()
 uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg"])
 
@@ -36,15 +36,25 @@ if st.button("Sumbit"):
         with open("temp_audio_input." + uploaded_file.name.split(".")[-1], "wb") as f:
             f.write(uploaded_file.getbuffer())
         input_filepath = "temp_audio_input." + uploaded_file.name.split(".")[-1]
-    
+
+
+        
+        audio_file = open(input_filepath, "rb")
+        transcription = client.audio.transcriptions.create(
+          file=audio_file,
+          model="whisper-1",
+          response_format="verbose_json",
+          timestamp_granularities=["word"])
+
+        st.write(transcription.words)
       
-        with open(input_filepath, "rb") as file:
-              transcription = client.audio.transcriptions.create(
-              file=(input_filepath, file.read()),
-              model="whisper-large-v3",
-              language=lang_dict[selection],
-              response_format="verbose_json",)
-              st.write(transcription.text)
+        # with open(input_filepath, "rb") as file:
+        #       transcription = client.audio.transcriptions.create(
+        #       file=(input_filepath, file.read()),
+        #       model="whisper-large-v3",
+        #       language=lang_dict[selection],
+        #       response_format="verbose_json",)
+        #       st.write(transcription.text)
     else:
         st.error("Upload an Audio File First")
           
