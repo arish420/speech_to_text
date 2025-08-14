@@ -50,7 +50,7 @@ if st.button("Sumbit"):
           model=translation_dict[translation_option])
 
 
-        segments = transcription['segments']
+        segments = transcription.segments
     
         sentences = []
         current_sentence = ""
