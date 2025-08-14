@@ -15,13 +15,13 @@ df_groq=pd.read_csv(url)
 
 # https://docs.google.com/spreadsheets/d/1R01qyrYpZn9CUtSGiI0IWysXwY7yP-jKo7YZ4xhu1uE/edit?gid=0#gid=0
 
-os.environ["GROQ_API_KEY"] =  df_groq.keys()[0]
+os.environ["OPENAI_API_KEY"] =  df_groq.keys()[0]
 
 
 
 st.title("Speech to Text AI")
 client = OpenAI()
-client = Groq()
+# client = Groq()
 uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg"])
 
 selection = st.selectbox("Select Output Language", ("Dutch","Spanish","French"))
