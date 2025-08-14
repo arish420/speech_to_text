@@ -24,10 +24,15 @@ client = OpenAI()
 # client = Groq()
 uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg"])
 
-selection = st.selectbox("Select Output Language", ("Dutch","Spanish","French"))
+col1, col2 = st.columns(2)
+with col1:
+    selection = st.selectbox("Select Output Language", ("Dutch","Spanish","French"))
+with col2:
+    translation_option = st.selectbox("Select Translation Option", ("Whisper","GPT-4o-mini-transcribe"))
 
-lang_dict={"Dutch":"nl","Spanish":"es","French":"fr"}
 
+lang_dict = {"Dutch":"nl","Spanish":"es","French":"fr"}
+translation_dict = {"Whisper":"whisper-1","GPT-4o-transcribe":"gpt-4o-transcribe"}
 
 if st.button("Sumbit"):
     if uploaded_file:
@@ -42,9 +47,9 @@ if st.button("Sumbit"):
         audio_file = open(input_filepath, "rb")
         transcription = client.audio.transcriptions.create(
           file=audio_file,
-          model="whisper-1",
+          model=translation_dict[translation_option],
           response_format="verbose_json",
-          timestamp_granularities=["word"])
+          timestamp_granularities=["segment"])
 
         st.write(transcription.words)
       
