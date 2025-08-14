@@ -1,4 +1,5 @@
 import streamlit as st
+from openai import OpenAI
 import os
 from groq import Groq
 import pandas as pd
