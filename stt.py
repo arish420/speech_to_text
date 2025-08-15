@@ -70,57 +70,7 @@ if st.button("Sumbit"):
               language=lang_dict[selection],
               response_format="verbose_json",)
               st.write(transcription.text)
-
             
-
-
-        # segments = transcription.segments
-    
-        # sentences = []
-        # current_sentence = ""
-        # start_time = None
-    
-        # for seg in segments:
-        #     if start_time is None:
-        #         start_time = seg['start']
-        #     current_sentence += " " + seg['text'].strip()
-        #     if re.search(r"[.!?]$", seg['text'].strip()):
-        #         sentences.append({
-        #             "start": start_time,
-        #             "end": seg['end'],
-        #             "text": current_sentence.strip()
-        #         })
-        #         current_sentence = ""
-        #         start_time = None
-    
-        # st.subheader("📝 Transcription with Timestamps")
-        # for s in sentences:
-        #     st.markdown(f"**[{s['start']:.2f} - {s['end']:.2f}]** {s['text']}")
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-        # with open(input_filepath, "rb") as file:
-        #       transcription = client.audio.transcriptions.create(
-        #       file=(input_filepath, file.read()),
-        #       model="whisper-large-v3",
-        #       language=lang_dict[selection],
-        #       response_format="verbose_json",)
-        #       st.write(transcription.text)
     else:
         st.error("Upload an Audio File First")
           
