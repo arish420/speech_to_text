@@ -38,7 +38,7 @@ uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "og
 
 col1, col2 = st.columns(2)
 with col1:
-    selection = st.selectbox("Select Output Language", ("Dutch","Spanish","French"))
+    selection = st.selectbox("Select Input Language", ("Dutch","Spanish","French"))
 with col2:
     translation_option = st.selectbox("Select Translation Option", ("Whisper","GPT-4o-transcribe"))
 
